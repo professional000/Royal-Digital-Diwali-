@@ -9,12 +9,12 @@ import { getFirestore } from
 "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AlzaSyD6s10K_b0-V4A-tldYD q_xZDnXACyYsx8",
+  authDomain: "https://royal-digital-hub.firebaseapp.com",
+  projectId: "royal-digital-hub",
+  storageBucket: "https://royal-digital-hub.firebasestorage.app",
+  messagingSenderId: "529367163614",
+  appId: "1:529367163614"
 };
 
 const app = initializeApp(firebaseConfig);
