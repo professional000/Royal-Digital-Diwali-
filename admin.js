@@ -1,3 +1,4 @@
+
 import { auth, db } from "./firebase-config.js";
 
 import {
@@ -25,9 +26,12 @@ const status = document.getElementById("status");
 let allEvents = [];
 
 
-/* ADMIN LOGIN */
+/* LOGIN */
 
-document.getElementById("loginBtn").onclick = async () => {
+document.getElementById("loginForm")
+.addEventListener("submit", async e => {
+
+  e.preventDefault();
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
@@ -36,22 +40,24 @@ document.getElementById("loginBtn").onclick = async () => {
 
   try {
 
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth,email,password);
 
-  } catch (error) {
+    status.textContent = "";
+
+  } catch(error) {
 
     status.textContent = "Login failed: " + error.message;
 
   }
 
-};
+});
 
 
-/* AUTHENTICATION STATE */
+/* AUTH STATE */
 
 onAuthStateChanged(auth, async user => {
 
-  if (user) {
+  if(user) {
 
     loginBox.style.display = "none";
     dashboard.style.display = "block";
@@ -68,7 +74,7 @@ onAuthStateChanged(auth, async user => {
 });
 
 
-/* LOAD FIREBASE EVENTS */
+/* LOAD ANALYTICS */
 
 async function loadAnalytics() {
 
@@ -76,14 +82,14 @@ async function loadAnalytics() {
 
   try {
 
-    const eventsQuery = query(
-      collection(db, "events"),
-      where("siteId", "==", SITE_ID),
-      orderBy("createdAt", "desc"),
+    const q = query(
+      collection(db,"events"),
+      where("siteId","==",SITE_ID),
+      orderBy("createdAt","desc"),
       limit(1000)
     );
 
-    const snapshot = await getDocs(eventsQuery);
+    const snapshot = await getDocs(q);
 
     allEvents = snapshot.docs.map(doc => doc.data());
 
@@ -91,16 +97,18 @@ async function loadAnalytics() {
 
     status.textContent = "Analytics loaded successfully.";
 
-  } catch (error) {
+  } catch(error) {
 
     status.textContent = "Unable to load: " + error.message;
+
+    console.error(error);
 
   }
 
 }
 
 
-/* FILTER AND CALCULATE */
+/* DASHBOARD */
 
 function renderDashboard() {
 
@@ -108,11 +116,9 @@ function renderDashboard() {
 
   let events = [...allEvents];
 
-  if (period !== "all") {
+  if(period !== "all") {
 
-    const days = Number(period);
-
-    const cutoff = Date.now() - days * 86400000;
+    const cutoff = Date.now() - Number(period) * 86400000;
 
     events = events.filter(e =>
       e.createdAt &&
@@ -120,7 +126,6 @@ function renderDashboard() {
     );
 
   }
-
 
   const count = name =>
     events.filter(e => e.event === name).length;
@@ -159,13 +164,14 @@ function renderDashboard() {
 
     const device = e.device || "Unknown";
 
-    deviceCounts[device] = (deviceCounts[device] || 0) + 1;
+    deviceCounts[device] =
+      (deviceCounts[device] || 0) + 1;
 
   });
 
   document.getElementById("devices").textContent =
     Object.entries(deviceCounts)
-      .map(([device, count]) => `${device}: ${count}`)
+      .map(([device,total]) => `${device}: ${total}`)
       .join(" | ") || "No data";
 
 
@@ -175,7 +181,7 @@ function renderDashboard() {
 
   table.replaceChildren();
 
-  events.slice(0, 50).forEach(e => {
+  events.slice(0,50).forEach(e => {
 
     const row = document.createElement("tr");
 
@@ -183,7 +189,7 @@ function renderDashboard() {
       ? e.createdAt.toDate().toLocaleString()
       : "Pending";
 
-    [e.event || "Unknown", e.device || "Unknown", date]
+    [e.event || "Unknown",e.device || "Unknown",date]
       .forEach(value => {
 
         const cell = document.createElement("td");
@@ -204,19 +210,20 @@ function renderDashboard() {
 /* FILTER */
 
 document.getElementById("period")
-  .addEventListener("change", renderDashboard);
+.addEventListener("change",renderDashboard);
 
 
 /* REFRESH */
 
 document.getElementById("refreshBtn")
-  .addEventListener("click", loadAnalytics);
+.addEventListener("click",loadAnalytics);
 
 
 /* LOGOUT */
 
-document.getElementById("logoutBtn").onclick = async () => {
+document.getElementById("logoutBtn")
+.addEventListener("click",async () => {
 
   await signOut(auth);
 
-};
+});
