@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ROYAL DIGITAL HUB | Admin</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #160d27;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    h1, h2 { color: #f5cf75; }
+
+    .panel {
+      background: #291a3c;
+      border: 1px solid #684b75;
+      padding: 22px;
+      border-radius: 16px;
+      margin: 20px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #b38bfa;
+      background: #170e29;
+      color: white;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      background: #e9c46a;
+      color: #21142b;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      background: #38234e;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .stat h2 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    .stat p { color: #d7c5e8; }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 13px;
+      border-bottom: 1px solid #61486f;
+      font-size: 13px;
+    }
+
+    th { color: #f5cf75; }
+
+    #dashboard { display: none; }
+
+    #status {
+      color: #f5cf75;
+      margin-top: 12px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media(max-width:600px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      body { padding: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>👑 ROYAL DIGITAL HUB</h1>
+  <p>Private Admin Analytics Dashboard</p>
+
+  <!-- LOGIN -->
+
+  <section id="login" class="panel">
+
+    <h2>Admin Login 🔐</h2>
+
+    <input id="email" type="email" placeholder="Admin Email">
+
+    <input id="password" type="password" placeholder="Admin Password">
+
+    <button id="loginBtn">Login</button>
+
+    <p id="status"></p>
+
+  </section>
+
+
+  <!-- DASHBOARD -->
+
+  <section id="dashboard">
+
+    <div class="top">
+      <h2>Analytics Overview</h2>
+      <button id="logoutBtn">Logout</button>
+    </div>
+
+    <p>Diwali Campaign: royal-diwali-2026</p>
+
+    <div class="panel">
+      <label for="period">Report period</label>
+      <select id="period">
+        <option value="all">All Time</option>
+        <option value="7">Last 7 Days</option>
+        <option value="30">Last 30 Days</option>
+      </select>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <p>Unique Visitors</p>
+        <h2 id="visitors">0</h2>
+      </div>
+
+      <div class="stat">
+        <p>Website Visits</p>
+        <h2 id="visits">0</h2>
+      </div>
+
+      <div class="stat">
+        <p>Surprise Opens</p>
+        <h2 id="opens">0</h2>
+      </div>
+
+      <div class="stat">
+        <p>WhatsApp Shares</p>
+        <h2 id="shares">0</h2>
+      </div>
+
+      <div class="stat">
+        <p>Video Plays</p>
+        <h2 id="videos">0</h2>
+      </div>
+
+      <div class="stat">
+        <p>Photo Views</p>
+        <h2 id="photos">0</h2>
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <h2>Device Statistics</h2>
+
+      <p id="devices">Loading...</p>
+
+    </div>
+
+
+    <div class="panel">
+
+      <h2>Recent Activity</h2>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th>Device</th>
+              <th>Date & Time</th>
+            </tr>
+          </thead>
+
+          <tbody id="activityTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <button id="refreshBtn">↻ Refresh Data</button>
+
+  </section>
+
+</div>
+
+<script type="module" src="admin.js"></script>
+
+</body>
+</html>
