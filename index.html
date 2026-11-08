@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#170d2d">
+  <meta name="description" content="A beautiful personalised Diwali surprise by ROYAL DIGITAL HUB">
+
+  <title>Happy Diwali | ROYAL DIGITAL HUB</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <canvas id="fireworks"></canvas>
+
+  <!-- MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="diwali.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicBtn" class="music-btn" aria-label="Toggle music">
+    🎵 Music
+  </button>
+
+  <!-- WELCOME SCREEN -->
+  <section id="welcomeScreen" class="welcome-screen">
+
+    <div class="welcome-content">
+
+      <div class="diya">🪔</div>
+
+      <p class="brand">ROYAL DIGITAL HUB</p>
+
+      <h1>A Special Diwali<br>
+        <span>Surprise For You!</span>
+      </h1>
+
+      <p class="tamil">
+        உங்களுக்காக ஒரு அழகான தீபாவளி சர்ப்ரைஸ் ❤️
+      </p>
+
+      <div class="name-input">
+        <input
+          type="text"
+          id="guestName"
+          placeholder="Enter Your Name / உங்கள் பெயர்"
+          maxlength="35"
+        >
+      </div>
+
+      <button id="openBtn" class="gold-btn">
+        🪔 Open Your Surprise
+      </button>
+
+      <p class="small-text">A little surprise filled with love ✨</p>
+
+    </div>
+  </section>
+
+
+  <!-- MAIN WEBSITE -->
+  <main id="mainContent" class="hidden">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="hero-lights">✨ ✨ ✨</div>
+
+      <div class="hero-diya">🪔</div>
+
+      <p class="brand">ROYAL DIGITAL HUB PRESENTS</p>
+
+      <h1>
+        Happy Diwali
+        <span id="displayName">Dear Friend</span>
+      </h1>
+
+      <h2>இனிய தீபாவளி நல்வாழ்த்துக்கள் ❤️</h2>
+
+      <p class="hero-message">
+        May your life shine brighter than a thousand diyas.
+        May happiness, love and prosperity fill your home.
+      </p>
+
+      <p class="hero-tamil">
+        உங்கள் வாழ்க்கையில் ஒளியும், மகிழ்ச்சியும்,
+        அன்பும், செல்வமும் என்றும் நிறைந்திருக்கட்டும்!
+      </p>
+
+      <div class="hero-actions">
+        <button class="gold-btn" id="celebrateBtn">
+          🎆 Celebrate Diwali
+        </button>
+
+        <button class="outline-btn" id="shareBtn">
+          💌 Share Wishes
+        </button>
+      </div>
+
+      <div class="scroll-text">SCROLL TO EXPLORE ↓</div>
+
+    </section>
+
+
+    <!-- WISHES -->
+    <section class="section wishes-section">
+
+      <p class="section-label">A MESSAGE FROM THE HEART</p>
+
+      <h2>Festival of Lights ✨</h2>
+
+      <div class="wish-card">
+
+        <div class="wish-icon">🪔</div>
+
+        <h3>ஒளிமயமான வாழ்க்கை!</h3>
+
+        <p>
+          இந்த தீபாவளி திருநாளில் உங்கள் வாழ்க்கையில்
+          அனைத்து துன்பங்களும் நீங்கி,
+          புதிய நம்பிக்கைகளும் கனவுகளும் மலரட்டும்.
+        </p>
+
+        <p>
+          Wishing you and your family a beautiful
+          Diwali filled with unlimited happiness,
+          peace, success and prosperity.
+        </p>
+
+        <div class="gold-line"></div>
+
+        <h3>இனிய தீபாவளி நல்வாழ்த்துக்கள்!</h3>
+
+      </div>
+
+    </section>
+
+
+    <!-- PHOTO MEMORIES -->
+    <section class="section memories-section">
+
+      <p class="section-label">BEAUTIFUL MOMENTS</p>
+
+      <h2>Diwali Memories 📸</h2>
+
+      <p class="section-description">
+        Every picture tells a beautiful story.
+      </p>
+
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <img src="photo1.jpg" alt="Diwali memory 1">
+          <span>Beautiful Moments ❤️</span>
+        </div>
+
+        <div class="photo-card">
+          <img src="photo2.jpg" alt="Diwali memory 2">
+          <span>Happy Memories ✨</span>
+        </div>
+
+        <div class="photo-card">
+          <img src="photo3.jpg" alt="Diwali memory 3">
+          <span>Special Moments 🪔</span>
+        </div>
+
+        <div class="photo-card">
+          <img src="photo4.jpg" alt="Diwali memory 4">
+          <span>Forever Memories 💛</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- VIDEO MEMORIES -->
+    <section class="section video-section">
+
+      <p class="section-label">RELIVE THE MOMENTS</p>
+
+      <h2>Video Memories 🎬</h2>
+
+      <div class="video-card">
+
+        <video controls playsinline poster="photo1.jpg">
+          <source src="memory.mp4" type="video/mp4">
+          Your browser does not support video.
+        </video>
+
+        <p>Our Beautiful Memories ❤️</p>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL WISH -->
+    <section class="final-section">
+
+      <div class="final-diya">🪔</div>
+
+      <h2>Let Your Life Shine!</h2>
+
+      <h3>உங்கள் இல்லம் மகிழ்ச்சியால் நிறையட்டும் ❤️</h3>
+
+      <p>
+        May every diya bring a new reason to smile.
+        Have a wonderful and blessed Diwali!
+      </p>
+
+      <button class="gold-btn" id="finalShareBtn">
+        💌 Send This Wish
+      </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+      <p>Made with ❤️ by</p>
+
+      <h2>ROYAL DIGITAL HUB</h2>
+
+      <p>Make Your Memories Unforgettable!</p>
+
+      <p class="copyright">
+        © 2026 ROYAL DIGITAL HUB. All Rights Reserved.
+      </p>
+
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
