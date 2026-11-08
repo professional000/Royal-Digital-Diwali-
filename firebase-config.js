@@ -9,10 +9,10 @@ import { getFirestore } from
 "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AlzaSyD6s10K_b0-V4A-tldYD q_xZDnXACyYsx8",
-  authDomain: "https://royal-digital-hub.firebaseapp.com",
+  apiKey: "AlzaSyD6s1OK_b0-V4A-t)dYDq_xZDnXACyYsx8",
+  authDomain: "royal-digital-hub.firebaseapp.com",
   projectId: "royal-digital-hub",
-  storageBucket: "https://royal-digital-hub.firebasestorage.app",
+  storageBucket: "royal-digital-hub.firebasestorage.app",
   messagingSenderId: "529367163614",
   appId: "1:529367163614"
 };
