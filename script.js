@@ -8,16 +8,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 
-/* ROYAL DIGITAL HUB CONFIG */
-
 const CONFIG = {
   defaultName: "Dear Friend",
-  whatsapp: "918220848715",
   siteId: "royal-diwali-2026"
 };
-
-
-/* ELEMENTS */
 
 const welcomeScreen = document.getElementById("welcomeScreen");
 const mainContent = document.getElementById("mainContent");
@@ -28,16 +22,13 @@ const musicBtn = document.getElementById("musicBtn");
 
 let currentName = CONFIG.defaultName;
 
-
-/* VISITOR IDENTIFICATION */
-
-function getId(key) {
+function getStoredId(key, storage) {
   try {
-    let value = localStorage.getItem(key);
+    let value = storage.getItem(key);
 
     if (!value) {
       value = crypto.randomUUID();
-      localStorage.setItem(key, value);
+      storage.setItem(key, value);
     }
 
     return value;
@@ -46,11 +37,8 @@ function getId(key) {
   }
 }
 
-const visitorId = getId("royal_visitor_id");
-const sessionId = getId("royal_session_id");
-
-
-/* DEVICE */
+const visitorId = getStoredId("royal_visitor_id", localStorage);
+const sessionId = getStoredId("royal_session_id", sessionStorage);
 
 function getDevice() {
   const ua = navigator.userAgent;
@@ -62,7 +50,7 @@ function getDevice() {
 }
 
 
-/* FIREBASE TRACKING */
+/* TRACK EVENTS */
 
 async function trackEvent(eventName) {
 
@@ -78,36 +66,19 @@ async function trackEvent(eventName) {
   if (!allowedEvents.includes(eventName)) return;
 
   try {
-
     await addDoc(collection(db, "events"), {
-
       event: eventName,
-
       siteId: CONFIG.siteId,
-
-      visitorId: visitorId,
-
-      sessionId: sessionId,
-
+      visitorId,
+      sessionId,
       device: getDevice(),
-
       page: location.pathname,
-
       createdAt: serverTimestamp()
-
     });
-
-    console.log("Tracked:", eventName);
-
   } catch (error) {
-
-    console.error("Analytics error:", error);
-
+    console.error("Tracking error:", error);
   }
 }
-
-
-/* FIRST VISIT */
 
 trackEvent("page_view");
 
@@ -137,33 +108,21 @@ document.getElementById("openBtn").addEventListener("click", async () => {
 /* MUSIC */
 
 async function playMusic() {
-
   try {
-
     await bgMusic.play();
-
     musicBtn.textContent = "🔊 Music ON";
-
-  } catch {
-
+  } catch (error) {
     musicBtn.textContent = "🔇 Tap for Music";
-
   }
-
 }
 
 musicBtn.addEventListener("click", async () => {
 
   if (bgMusic.paused) {
-
     await playMusic();
-
   } else {
-
     bgMusic.pause();
-
     musicBtn.textContent = "🔇 Music OFF";
-
   }
 
 });
@@ -180,14 +139,16 @@ function shareDiwaliWish() {
 May your life shine with happiness,
 love and prosperity.
 
+உங்கள் வாழ்க்கையில் மகிழ்ச்சி,
+அன்பு மற்றும் செல்வம் நிறைந்திருக்கட்டும்!
+
 Open your special Diwali surprise:
 ${location.href}
 
 With Love,
 ROYAL DIGITAL HUB ❤️`;
 
-  const url =
-    "https://wa.me/?text=" + encodeURIComponent(message);
+  const url = "https://wa.me/?text=" + encodeURIComponent(message);
 
   window.open(url, "_blank", "noopener,noreferrer");
 
@@ -202,7 +163,7 @@ document.getElementById("finalShareBtn")
   .addEventListener("click", shareDiwaliWish);
 
 
-/* PHOTO SECTION TRACKING */
+/* PHOTO TRACKING */
 
 const photoSection = document.querySelector(".memories-section");
 
@@ -217,9 +178,7 @@ if (photoSection && "IntersectionObserver" in window) {
       if (entry.isIntersecting && !photoTracked) {
 
         photoTracked = true;
-
         trackEvent("photo_section_viewed");
-
         observer.disconnect();
 
       }
@@ -235,7 +194,7 @@ if (photoSection && "IntersectionObserver" in window) {
 
 /* VIDEO TRACKING */
 
-const video = document.querySelector(".video-card video");
+const video = document.getElementById("memoryVideo");
 
 if (video) {
 
@@ -257,6 +216,7 @@ const ctx = canvas.getContext("2d");
 
 let particles = [];
 let animationRunning = false;
+let fireworkInterval = null;
 
 function resizeCanvas() {
 
@@ -273,7 +233,6 @@ function resizeCanvas() {
 }
 
 resizeCanvas();
-
 window.addEventListener("resize", resizeCanvas);
 
 
@@ -295,18 +254,14 @@ function createFirework(x, y) {
     const speed = Math.random() * 5 + 1;
 
     particles.push({
-
-      x, y,
-
+      x,
+      y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-
       alpha: 1,
       decay: Math.random() * 0.012 + 0.008,
-
       color,
       size: Math.random() * 3 + 1
-
     });
 
   }
@@ -326,6 +281,8 @@ function animateFireworks() {
     p.y += p.vy;
 
     p.vy += 0.035;
+    p.vx *= 0.99;
+
     p.alpha -= p.decay;
 
     if (p.alpha > 0) {
@@ -353,30 +310,29 @@ function animateFireworks() {
 function startFireworks() {
 
   if (!animationRunning) {
-
     animationRunning = true;
-
     animateFireworks();
-
   }
 
   createFirework(innerWidth / 2, innerHeight / 3);
 
-  const interval = setInterval(() => {
+  if (fireworkInterval) return;
+
+  fireworkInterval = setInterval(() => {
 
     if (particles.length < 350) {
-
       createFirework(
         Math.random() * innerWidth,
         Math.random() * innerHeight * 0.55
       );
-
     }
 
   }, 900);
 
-  // Stop background fireworks after 30 seconds.
-  setTimeout(() => clearInterval(interval), 30000);
+  setTimeout(() => {
+    clearInterval(fireworkInterval);
+    fireworkInterval = null;
+  }, 30000);
 
 }
 
@@ -387,17 +343,14 @@ document.getElementById("celebrateBtn")
     for (let i = 0; i < 5; i++) {
 
       setTimeout(() => {
-
         createFirework(
           Math.random() * innerWidth,
           Math.random() * innerHeight * 0.5
         );
-
       }, i * 250);
 
     }
 
   });
 
-
-console.log("ROYAL DIGITAL HUB Tracking Ready");
+console.log("ROYAL DIGITAL HUB - Diwali Tracking Ready");
