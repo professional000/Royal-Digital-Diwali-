@@ -3,30 +3,25 @@
 <html lang="ta">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#170d2d">
-  <meta name="description" content="A beautiful personalised Diwali surprise by ROYAL DIGITAL HUB">
-
+  <meta name="description" content="A personalised Diwali surprise by ROYAL DIGITAL HUB">
   <title>Happy Diwali | ROYAL DIGITAL HUB</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Noto+Sans+Tamil:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
   <canvas id="fireworks"></canvas>
 
-  <!-- MUSIC -->
   <audio id="bgMusic" loop>
     <source src="diwali.mp3" type="audio/mpeg">
   </audio>
 
-  <button id="musicBtn" class="music-btn" aria-label="Toggle music">
-    🎵 Music
-  </button>
+  <button id="musicBtn" class="music-btn">🎵 Music OFF</button>
 
   <!-- WELCOME SCREEN -->
   <section id="welcomeScreen" class="welcome-screen">
@@ -37,7 +32,8 @@
 
       <p class="brand">ROYAL DIGITAL HUB</p>
 
-      <h1>A Special Diwali<br>
+      <h1>
+        A Special Diwali
         <span>Surprise For You!</span>
       </h1>
 
@@ -45,20 +41,20 @@
         உங்களுக்காக ஒரு அழகான தீபாவளி சர்ப்ரைஸ் ❤️
       </p>
 
-      <div class="name-input">
-        <input
-          type="text"
-          id="guestName"
-          placeholder="Enter Your Name / உங்கள் பெயர்"
-          maxlength="35"
-        >
-      </div>
+      <input
+        type="text"
+        id="guestName"
+        placeholder="Enter Your Name / உங்கள் பெயர்"
+        maxlength="35"
+      >
 
       <button id="openBtn" class="gold-btn">
         🪔 Open Your Surprise
       </button>
 
-      <p class="small-text">A little surprise filled with love ✨</p>
+      <p class="small-text">
+        A little surprise filled with love ✨
+      </p>
 
     </div>
   </section>
@@ -70,7 +66,7 @@
     <!-- HERO -->
     <section class="hero">
 
-      <div class="hero-lights">✨ ✨ ✨</div>
+      <div class="hero-lights">✨ 🪔 ✨</div>
 
       <div class="hero-diya">🪔</div>
 
@@ -94,13 +90,15 @@
       </p>
 
       <div class="hero-actions">
-        <button class="gold-btn" id="celebrateBtn">
+
+        <button id="celebrateBtn" class="gold-btn">
           🎆 Celebrate Diwali
         </button>
 
-        <button class="outline-btn" id="shareBtn">
+        <button id="shareBtn" class="outline-btn">
           💌 Share Wishes
         </button>
+
       </div>
 
       <div class="scroll-text">SCROLL TO EXPLORE ↓</div>
@@ -109,7 +107,7 @@
 
 
     <!-- WISHES -->
-    <section class="section wishes-section">
+    <section class="section">
 
       <p class="section-label">A MESSAGE FROM THE HEART</p>
 
@@ -129,8 +127,8 @@
 
         <p>
           Wishing you and your family a beautiful
-          Diwali filled with unlimited happiness,
-          peace, success and prosperity.
+          Diwali filled with happiness, peace,
+          success and prosperity.
         </p>
 
         <div class="gold-line"></div>
@@ -156,22 +154,22 @@
       <div class="photo-grid">
 
         <div class="photo-card">
-          <img src="photo1.jpg" alt="Diwali memory 1">
+          <img src="photo1.jpg" alt="Memory 1" loading="lazy">
           <span>Beautiful Moments ❤️</span>
         </div>
 
         <div class="photo-card">
-          <img src="photo2.jpg" alt="Diwali memory 2">
+          <img src="photo2.jpg" alt="Memory 2" loading="lazy">
           <span>Happy Memories ✨</span>
         </div>
 
         <div class="photo-card">
-          <img src="photo3.jpg" alt="Diwali memory 3">
+          <img src="photo3.jpg" alt="Memory 3" loading="lazy">
           <span>Special Moments 🪔</span>
         </div>
 
         <div class="photo-card">
-          <img src="photo4.jpg" alt="Diwali memory 4">
+          <img src="photo4.jpg" alt="Memory 4" loading="lazy">
           <span>Forever Memories 💛</span>
         </div>
 
@@ -189,7 +187,7 @@
 
       <div class="video-card">
 
-        <video controls playsinline poster="photo1.jpg">
+        <video id="memoryVideo" controls playsinline preload="metadata" poster="photo1.jpg">
           <source src="memory.mp4" type="video/mp4">
           Your browser does not support video.
         </video>
@@ -215,7 +213,7 @@
         Have a wonderful and blessed Diwali!
       </p>
 
-      <button class="gold-btn" id="finalShareBtn">
+      <button id="finalShareBtn" class="gold-btn">
         💌 Send This Wish
       </button>
 
@@ -239,7 +237,7 @@
 
   </main>
 
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 
 </body>
 </html>
